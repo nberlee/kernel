@@ -1,14 +1,14 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.3.0
+# syntax = ghcr.io/siderolabs/bldr:v0.3.2
 
 format: v1alpha2
 
 vars:
-  TOOLS_IMAGE: ghcr.io/siderolabs/tools:v1.7.0-4-gc844dc3
+  TOOLS_IMAGE: ghcr.io/siderolabs/tools:v1.8.0-1-ga0c06c6
 
   # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-  linux_version: 6.6.43
-  linux_sha256: 0ad83b1a1a780a1aad948d55aa55ee63c50c626f2d46910b9d2180028d100a5e
-  linux_sha512: 013027b921184cf7fee360e930472689c0ad202e06b4ddcc2b3207f52ea6244890d9ed267ffe5590335501318dd8386c873f038de875a70d637a58f1a405a55a
+  linux_version: 6.6.49
+  linux_sha256: 2c56dac2b70859c16b4ef651befb0d28c227498bd3eee08e8a45a357f22dd3b7
+  linux_sha512: 3db87b48dd3b771cd119cf48f9fbad43cfe2f90e34bb06419a25068a6807c294d2019089a21471b72c1438f45a84d99ecf77d322ef85b3e2815c7dedc6f41bd8
 labels:
   org.opencontainers.image.source: https://github.com/nberlee/kernel
 

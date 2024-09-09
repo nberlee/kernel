@@ -15,7 +15,7 @@ steps:
         mkdir -p /rootfs/certs
         cp /src/certs/signing_key.x509 /rootfs/certs/signing_key.x509
 
-        mv arch/arm64/boot/Image /rootfs/boot/vmlinuz
+        mv arch/arm64/boot/vmlinuz.efi /rootfs/boot/vmlinuz
         mv arch/arm64/boot/dts/rockchip/rk3588-turing-rk1.dtb /rootfs/dtb/rockchip/rk3588-turing-rk1.dtb
 
         export KERNELRELEASE=$(cat include/config/kernel.release)
