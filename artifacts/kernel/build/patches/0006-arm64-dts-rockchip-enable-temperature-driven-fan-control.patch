@@ -198,7 +198,7 @@ index c77010d93..3dea079cf 100644
  	fan: pwm-fan {
  		compatible = "pwm-fan";
 -		cooling-levels = <0 25 95 145 195 255>;
-+		cooling-levels = <0 25 90 150 180 220 255>;
++		cooling-levels = <0 90 150 180 210 240 255>;
  		fan-supply = <&vcc5v0_sys>;
  		pinctrl-names = "default";
  		pinctrl-0 = <&pwm0m2_pins &fan_int>;
