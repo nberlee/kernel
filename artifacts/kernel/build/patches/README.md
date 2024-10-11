@@ -19,3 +19,4 @@
 | 0018-arch-arm64-boot-dts-rockchip-add-crypto.patch | Add crypto node to RK3588 dts            | Not upstreamed             | [Patchwork](https://patchwork.kernel.org/project/linux-arm-kernel/patch/20231107155532.3747113-4-clabbe@baylibre.com/) / [mailing-list](https://lore.kernel.org/all/20231107155532.3747113-4-clabbe@baylibre.com/) |
 | 0019-net-stmmac-improve-tx-timer-logic.patch | Improve TX timer logic for stmmac            | 6.7             | [Patchwork](https://patchwork.kernel.org/project/linux-arm-kernel/list/?series=794317&state=%2A&archive=both) |
 | 0020-net-stmmac-Add-support-for-HW-accelerated-VLAN-stripping.patch | Make VLANs work on stmmac (more than 210 bytes per frame)           | 6.8             | [Patchwork](https://patchwork.kernel.org/project/linux-arm-kernel/patch/20231121053842.719531-1-yi.fang.gan@intel.com/) |
+| mpt3sas-ubsan.patch | Backport fixes for UBSAN reporting | in 6.8 | Commit fd7090e384725edb1910a4b0a9c51007858f2c81 |
