@@ -1,10 +1,10 @@
-From patchwork Thu Feb 29 19:26:32 2024
+From patchwork Mon Jun 17 18:28:51 2024
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Patchwork-Submitter: Alexey Charkov <alchark@gmail.com>
-X-Patchwork-Id: 13577569
-Return-Path: 
+X-Patchwork-Id: 13701236
+Return-Path:
  <linux-rockchip-bounces+linux-rockchip=archiver.kernel.org@lists.infradead.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
@@ -12,98 +12,99 @@ Received: from bombadil.infradead.org (bombadil.infradead.org
  [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73C9AC48BF6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55AA3C2BA1A
 	for <linux-rockchip@archiver.kernel.org>;
- Thu, 29 Feb 2024 19:27:24 +0000 (UTC)
+ Mon, 17 Jun 2024 18:29:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.infradead.org; s=bombadil.20210309; h=Sender:
 	Content-Transfer-Encoding:Content-Type:List-Subscribe:List-Help:List-Post:
 	List-Archive:List-Unsubscribe:List-Id:Cc:To:In-Reply-To:References:Message-Id
 	:MIME-Version:Subject:Date:From:Reply-To:Content-ID:Content-Description:
 	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	List-Owner; bh=p39Ezur3qJrI/9igpCvFxkV5OMJYUwQt0jLJxkLidl4=; b=R8pH3Cm1SL2rp0
-	LCjCybI5GPfigF8YV0/8n3ehZVa2pM8wvhYPBwiaXNmr58RiXAM3fXrrSVyGdo+B29eJPHVLGQGjQ
-	jVdqOdWymOj/D2phj/HiFlbSaChZGndy67fv8QJb/VqSKimtpigFGGBJB0uiuOODU5tBb4AnVG3hd
-	JvzpRQYgoeHejS0L+rNNC+WcnAjAuru0a1YZCAC5o7nSBCzDP6I4qTAwjhjLfp42E/bfzgA05s2Sa
-	wYuCbF/R2xHbta9cRCwtrn+VTOe72V9Xw9giVGF4UL+SL3VAGrLgMvBABRhY4HPKqTzgn3NHQ2c6+
-	tBGNBvkKkTjqQHMWmMZg==;
+	List-Owner; bh=V2D0sfXo14WBHkyJgg6lemvLW7XlmDwtnd9Z0WSUCfQ=; b=4NTAYAJPMAjS74
+	ozQbcBOSuuSFIhBvoPbmQP5RIBv9chHhc4kWMLHUxCO4Mpzu42uWzbnwbYUOKdEfqnsg95rttD+nq
+	N/gH2xDXoPJnKpK9p1XK+ZrohLxSaBPcyaYmjrbeVu9ccR559uCYwsFs5JCateCrWBOBnb5MPeLFC
+	hSZSCO17fN4WKyfAJabIZ6ZyOk44ZNuBJqDGNDSDLQGZhrSkS/DmoDXHuloJUiPvWRzTCmYfeNG3r
+	YgYueiVxs7I9y4rF7Lkb5ajYRQjzBUf61FPBml5uASPv9OAkpfF5NDM3+easN5rsWC/XTfxn4hpSj
+	hiLe/ZbIyREjoANdXqYg==;
 Received: from localhost ([::1] helo=bombadil.infradead.org)
 	by bombadil.infradead.org with esmtp (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1rfm3q-0000000EsIm-4APS;
-	Thu, 29 Feb 2024 19:27:18 +0000
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+	id 1sJH6q-0000000CAwJ-22Na;
+	Mon, 17 Jun 2024 18:29:40 +0000
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
 	by bombadil.infradead.org with esmtps (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1rfm3d-0000000Es2r-0pA2;
-	Thu, 29 Feb 2024 19:27:06 +0000
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2d2533089f6so15715961fa.1;
-        Thu, 29 Feb 2024 11:27:04 -0800 (PST)
+	id 1sJH6f-0000000CAsA-2c6N;
+	Mon, 17 Jun 2024 18:29:34 +0000
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-57c714a1e24so5259908a12.2;
+        Mon, 17 Jun 2024 11:29:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709234823; x=1709839623;
+        d=gmail.com; s=20230601; t=1718648968; x=1719253768;
  darn=lists.infradead.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=20EWnaUkI15CtQikfFG0yCSv5fORGteC+QDCYIVPCHg=;
-        b=KcR5kiKbi1pQ01CBRCF3ah4U62XSvrlHoyEOh4ew0ASgibt7oqmm1/fCoeX4KoNMhX
-         ieN28NWpb8fqfMGE0LNubUDiUM934TksClOwxVQ5ZYLSbJb9709uezrwmPCQ+/CiXjrX
-         efeEvnGbEfDU/pDi2gqfpQA8olmpLHao9DpH+e3RG+9HiPMUNWoAgiy4g3fAsLSjjmk3
-         pj7t3tFCHsCAUmRwB/9qN9nLU3K3LEvA7CB/Y4nhv5aFDc+pLL738Xyh1kjf/UDn81gq
-         oHVCJKu3wGGax3dZcipJ82aron945o8piNoycNMwKvq6w/MhRXQV+uMYPaeq/JpnVGID
-         ofAw==
+        bh=2X2WIsak2atiEiHDdvF6RWJsXkV1zq+NhgYFvPOjT68=;
+        b=I4F9oO1BEfh4YnKL/Vk2q1MQ854NPXXxXYUuh81z7qzM6jv4Hj9nxlHV6Ua8i40AcN
+         RCUIjYQ9uYhvfCXAh2vEKHGtJhvftE5bvaLZ+BtVqTyIlD4ozFtqbBWTk6CL82imJMxl
+         HX08KRu/r2bvil5xOeZnR6Qafjth/Q6VIzQO5QSAsJp5jEX4udS+62BtvVO8WrXBD8zi
+         6WdIWU9nMB9+dLfDI66efScT12onuCbx1mxXT7yTYGqH96oEYAgcMwxgCrIrkmB5mkaZ
+         ezfwUIgoiEMNKGZCz1c0ff9NrDxUzPM9+iBYBNoMIZvLC1kfvhB9okWznZqc/SzPCIel
+         4kWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709234823; x=1709839623;
+        d=1e100.net; s=20230601; t=1718648968; x=1719253768;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=20EWnaUkI15CtQikfFG0yCSv5fORGteC+QDCYIVPCHg=;
-        b=otReFCdVBpWjhoGuHu5Z/tcAaBrXBlWsnVFr6Z1you+EePH5+HbRXL8aJtb0MQha6L
-         QdfAU/Y3dMTBY7IGwE0446nZEUdkze9EAK/AR1ekFUNrsSRvK7YUEfCXPMIjOL1uRdKI
-         npEoCH65LfRDaGwC+XXZanJgOAfvgiwL0leIunUX4wgMYi8F6qFyMd+V49DTu1DH0/wJ
-         NoqiZS3AGtXiEnInUwXLEAQcRvIxpNSZtDTEZ2ADmTz1fXDSZXrbR+P4RA/84BlVW4WZ
-         pX8u0EgzXOfX8Yl6XhQi2L6zi0FrXbIkuvdko2WQIncuLbcOlnuWj3k3/ItJ5t3jPZ3Q
-         QPAQ==
+        bh=2X2WIsak2atiEiHDdvF6RWJsXkV1zq+NhgYFvPOjT68=;
+        b=id+sXu8o4bQ0+T8d84WFB3q8FoWQbH+d+eoq5ybWNF/jT24l/Jid1Xa1gqwqpcrbN+
+         oeDLROAEu00oljUJ6qx791iHVY28re8HXbWyVHL/iKnlmOr46dGzP48BhAUPhenyjzx2
+         /LNud+ps6OZL8BH2bHltv4HrnmLbl+oO9IZZryaLNL2wtPsoSbMEpcfVfIXFIpbG3Cg5
+         b/0cEgtmpddmX3hJ5wtjPew46oG2EupVtvIN4K6bXFD8sh/BGoKaKxSrTlZhvCC0l7Hh
+         kJh0QXUWwDTppTIHTDjvxL2F5UHXJv9gFPiH+lhFZWp7F9991ArrO75rlP8U6Nedx0L2
+         kUrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7D688j/0UiM6TLzSajxr4FY3DpDyDS+1ufakTJ4ZMNL2PvokGWMCz5Gj1GkKTU7Oex7bN4uk7fLTTZMMOBDY3lxyM6M5a1hCNCvt5LYDOItUF1OZcpasj/NKQ5JxJ5D6tmZTwzgBor6iLyrMvCt7eK35Wmgrgek4=
-X-Gm-Message-State: AOJu0YxHghBxHXNfegzCfqWhGAErERTLBd+XUkEk7mTJMrFD4dmK0L6z
-	NalRBVFDLJpZiQCCgHfTVNxyrJn4wYPrlmZLidoZMZjRDxWtU2ir
-X-Google-Smtp-Source: 
- AGHT+IH3R5JqvSl7iaLlefeqBIeHTHtBwxmWhlq8gm37t6m5FX4GXWbwvL7dT8f3PxOK3XKgFqihwg==
-X-Received: by 2002:a05:6512:285:b0:513:1957:de76 with SMTP id
- j5-20020a056512028500b005131957de76mr2197376lfp.48.1709234823266;
-        Thu, 29 Feb 2024 11:27:03 -0800 (PST)
-Received: from [172.30.32.188] ([2001:8f8:183b:6ebc::d35])
+ AJvYcCUQHggwFPheKCePUq9PPDSBbK5WI8DXOY2tI4csaoJih8ocj3/O2q8xJ3GkZMi57fOlzAZ0LaegGc1GDzH7pS24Oa/NSW41L0JaKFvIjOS2KuN60lpTWJzqwDq8CJZKZRlsoYwAOgp22dpSUgkeiW7/Zuu/jfU45Uo=
+X-Gm-Message-State: AOJu0YyTmul+VKL4/QzbCjgWHH/plWq5y3qxS7bvxiC50pwlfg9O0jrJ
+	CiX7j19+e+QALalj/6fp36Mg5Zp2HwKz6zQ8Irm+oVZGzjpPdJVt
+X-Google-Smtp-Source:
+ AGHT+IEcKf9ojnPn5YIlp3N2ikFO56e3roYuTKmZx16sk9mDhWUzy5UpZZ7PtHOykON1A5MyEIXOeQ==
+X-Received: by 2002:a17:906:6889:b0:a6c:8b01:3f78 with SMTP id
+ a640c23a62f3a-a6f60cf3871mr665133566b.9.1718648967677;
+        Mon, 17 Jun 2024 11:29:27 -0700 (PDT)
+Received: from latitude-fedora.lan ([2001:8f8:183b:6864::d35])
         by smtp.gmail.com with ESMTPSA id
- j20-20020a05600c1c1400b00412bca49a5bsm2853944wms.42.2024.02.29.11.27.00
+ a640c23a62f3a-a6f8a6e58bdsm115397666b.187.2024.06.17.11.29.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Feb 2024 11:27:02 -0800 (PST)
+        Mon, 17 Jun 2024 11:29:27 -0700 (PDT)
 From: Alexey Charkov <alchark@gmail.com>
-Date: Thu, 29 Feb 2024 23:26:32 +0400
-Subject: [PATCH v3 1/5] arm64: dts: rockchip: enable built-in thermal
- monitoring on RK3588
+Date: Mon, 17 Jun 2024 22:28:51 +0400
+Subject: [PATCH v5 1/8] arm64: dts: rockchip: add thermal zones information
+ on RK3588
 MIME-Version: 1.0
-Message-Id: <20240229-rk-dts-additions-v3-1-6afe8473a631@gmail.com>
-References: <20240229-rk-dts-additions-v3-0-6afe8473a631@gmail.com>
-In-Reply-To: <20240229-rk-dts-additions-v3-0-6afe8473a631@gmail.com>
+Message-Id: <20240617-rk-dts-additions-v5-1-c1f5f3267f1e@gmail.com>
+References: <20240617-rk-dts-additions-v5-0-c1f5f3267f1e@gmail.com>
+In-Reply-To: <20240617-rk-dts-additions-v5-0-c1f5f3267f1e@gmail.com>
 To: Rob Herring <robh+dt@kernel.org>,
  Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
  Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>
 Cc: Daniel Lezcano <daniel.lezcano@linaro.org>,
  Dragan Simic <dsimic@manjaro.org>, Viresh Kumar <viresh.kumar@linaro.org>,
- Chen-Yu Tsai <wens@kernel.org>, devicetree@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
- linux-kernel@vger.kernel.org, Alexey Charkov <alchark@gmail.com>
-X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1709234816; l=6298;
+ Chen-Yu Tsai <wens@kernel.org>, Diederik de Haas <didi.debian@cknow.org>,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org,
+ Alexey Charkov <alchark@gmail.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1718648960; l=4812;
  i=alchark@gmail.com; s=20240125; h=from:subject:message-id;
- bh=KE5Jvpu3STLZrEvVNxKi1wKt+ErCjU4LRTI7OASbqGw=;
- b=WH671zV4Gx1dsodJR5Ul9TBvyZalFimp/hbN9jjKVBKh2Amf8fkBDaPZra42YOGRQgbPYBftN
- F8zzCzWzudFAP4SVsEHs6YyCIyOZXkDj5DuVGTZFnlp40VGLGzIbtKl
+ bh=RcpwIjmnR3ZB6lo2LEJCkEMEywnrfAp8940slGy+YX8=;
+ b=t0aimbVHoYZS+Tv6Rzg+QZCtIdY2IvOFNcU16ePc3fJvrwMLGRHzh65G5oZ7/UWW3XGtZhs6q
+ xzrMfFXQdCeD94mc8Moc+eLIfTzcOBvkx1I4S7yuqqK37c19baZKRg/
 X-Developer-Key: i=alchark@gmail.com; a=ed25519;
  pk=xRO8VeD3J5jhwe0za0aHt2LDumQr8cm0Ls7Jz3YGimk=
-X-CRM114-Version: 20100106-BlameMichelson ( TRE 0.8.0 (BSD) ) MR-646709E3 
-X-CRM114-CacheID: sfid-20240229_112705_287944_4378B40D 
-X-CRM114-Status: GOOD (  16.44  )
+X-CRM114-Version: 20100106-BlameMichelson ( TRE 0.8.0 (BSD) ) MR-646709E3
+X-CRM114-CacheID: sfid-20240617_112929_718910_53C7B789
+X-CRM114-Status: GOOD (  12.44  )
 X-BeenThere: linux-rockchip@lists.infradead.org
 X-Mailman-Version: 2.1.34
 Precedence: list
@@ -117,28 +118,20 @@ List-Help: <mailto:linux-rockchip-request@lists.infradead.org?subject=help>
 List-Subscribe: <http://lists.infradead.org/mailman/listinfo/linux-rockchip>,
  <mailto:linux-rockchip-request@lists.infradead.org?subject=subscribe>
 Sender: "Linux-rockchip" <linux-rockchip-bounces@lists.infradead.org>
-Errors-To: 
+Errors-To:
  linux-rockchip-bounces+linux-rockchip=archiver.kernel.org@lists.infradead.org
 
-Include thermal zones information in device tree for RK3588 variants.
+This includes the necessary device tree data to allow thermal
+monitoring on RK3588(s) using the on-chip TSADC device, along with
+trip points for automatic thermal management.
 
-This also enables the TSADC controller unconditionally on all boards
-to ensure that thermal protections are in place via throttling and
-emergency reset, once OPPs are added to enable CPU DVFS.
+Each of the CPU clusters (one for the little cores and two for
+the big cores) get a passive cooling trip point at 85C, which
+will trigger DVFS throttling of the respective cluster upon
+reaching a high temperature condition.
 
-The default settings (using CRU as the emergency reset mechanism)
-should work on all boards regardless of their wiring, as CRU resets
-do not depend on any external components. Boards that have the TSHUT
-signal wired to the reset line of the PMIC may opt to switch to GPIO
-tshut mode instead (rockchip,hw-tshut-mode = <1>;)
-
-It seems though that downstream kernels don't use that, even for
-those boards where the wiring allows for GPIO based tshut, such as
-Radxa Rock 5B [1], [2], [3]
-
-[1] https://github.com/radxa/kernel/blob/stable-5.10-rock5/arch/arm64/boot/dts/rockchip/rk3588-rock-5b.dts#L540
-[2] https://github.com/radxa/kernel/blob/stable-5.10-rock5/arch/arm64/boot/dts/rockchip/rk3588s.dtsi#L5433
-[3] https://dl.radxa.com/rock5/5b/docs/hw/radxa_rock_5b_v1423_sch.pdf page 11 (TSADC_SHUT_H)
+All zones also have a critical trip point at 115C, which will
+trigger a reset.
 
 Signed-off-by: Alexey Charkov <alchark@gmail.com>
 ---
@@ -165,7 +158,7 @@ index 36b1b7acfe6a..9bf197358642 100644
  		rockchip,hw-tshut-temp = <120000>;
  		rockchip,hw-tshut-mode = <0>; /* tshut mode 0:CRU 1:GPIO */
  		rockchip,hw-tshut-polarity = <0>; /* tshut polarity 0:LOW 1:HIGH */
-@@ -2061,7 +2061,180 @@ tsadc: tsadc@fec00000 {
+@@ -2061,7 +2061,153 @@ tsadc: tsadc@fec00000 {
  		pinctrl-1 = <&tsadc_shut>;
  		pinctrl-names = "gpio", "otpout";
  		#thermal-sensor-cells = <1>;
@@ -196,16 +189,7 @@ index 36b1b7acfe6a..9bf197358642 100644
 +			thermal-sensors = <&tsadc 1>;
 +
 +			trips {
-+				/* threshold to start collecting temperature
-+				 * statistics e.g. with the IPA governor
-+				 */
-+				bigcore0_alert0: bigcore0-alert0 {
-+					temperature = <75000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+				/* actual control temperature */
-+				bigcore0_alert1: bigcore0-alert1 {
++				bigcore0_alert: bigcore0-alert {
 +					temperature = <85000>;
 +					hysteresis = <2000>;
 +					type = "passive";
@@ -218,7 +202,7 @@ index 36b1b7acfe6a..9bf197358642 100644
 +			};
 +			cooling-maps {
 +				map0 {
-+					trip = <&bigcore0_alert1>;
++					trip = <&bigcore0_alert>;
 +					cooling-device =
 +						<&cpu_b0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
 +						<&cpu_b1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
@@ -233,16 +217,7 @@ index 36b1b7acfe6a..9bf197358642 100644
 +			thermal-sensors = <&tsadc 2>;
 +
 +			trips {
-+				/* threshold to start collecting temperature
-+				 * statistics e.g. with the IPA governor
-+				 */
-+				bigcore2_alert0: bigcore2-alert0 {
-+					temperature = <75000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+				/* actual control temperature */
-+				bigcore2_alert1: bigcore2-alert1 {
++				bigcore2_alert: bigcore2-alert {
 +					temperature = <85000>;
 +					hysteresis = <2000>;
 +					type = "passive";
@@ -255,7 +230,7 @@ index 36b1b7acfe6a..9bf197358642 100644
 +			};
 +			cooling-maps {
 +				map0 {
-+					trip = <&bigcore2_alert1>;
++					trip = <&bigcore2_alert>;
 +					cooling-device =
 +						<&cpu_b2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
 +						<&cpu_b3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
@@ -270,16 +245,7 @@ index 36b1b7acfe6a..9bf197358642 100644
 +			thermal-sensors = <&tsadc 3>;
 +
 +			trips {
-+				/* threshold to start collecting temperature
-+				 * statistics e.g. with the IPA governor
-+				 */
-+				littlecore_alert0: littlecore-alert0 {
-+					temperature = <75000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+				/* actual control temperature */
-+				littlecore_alert1: littlecore-alert1 {
++				littlecore_alert: littlecore-alert {
 +					temperature = <85000>;
 +					hysteresis = <2000>;
 +					type = "passive";
@@ -292,7 +258,7 @@ index 36b1b7acfe6a..9bf197358642 100644
 +			};
 +			cooling-maps {
 +				map0 {
-+					trip = <&littlecore_alert1>;
++					trip = <&littlecore_alert>;
 +					cooling-device =
 +						<&cpu_l0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
 +						<&cpu_l1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
