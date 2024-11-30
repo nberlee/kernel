@@ -10,18 +10,18 @@ steps:
       - |
         cd /src
 
-        mkdir -p /rootfs/boot
+        #mkdir -p /rootfs/boot
         mkdir -p /rootfs/dtb/rockchip
-        mkdir -p /rootfs/certs
-        cp /src/certs/signing_key.x509 /rootfs/certs/signing_key.x509
+        #mkdir -p /rootfs/certs
+        #cp /src/certs/signing_key.x509 /rootfs/certs/signing_key.x509
 
-        mv arch/arm64/boot/vmlinuz.efi /rootfs/boot/vmlinuz
+        #mv arch/arm64/boot/vmlinuz.efi /rootfs/boot/vmlinuz
         mv arch/arm64/boot/dts/rockchip/rk3588-turing-rk1.dtb /rootfs/dtb/rockchip/rk3588-turing-rk1.dtb
 
-        export KERNELRELEASE=$(cat include/config/kernel.release)
-        make -j $(nproc) modules_install DEPMOD=/toolchain/bin/depmod INSTALL_MOD_PATH=/rootfs INSTALL_MOD_STRIP=1
-        depmod -b /rootfs $KERNELRELEASE
-        unlink /rootfs/lib/modules/$KERNELRELEASE/build
+        #export KERNELRELEASE=$(cat include/config/kernel.release)
+        #make -j $(nproc) modules_install DEPMOD=/toolchain/bin/depmod INSTALL_MOD_PATH=/rootfs INSTALL_MOD_STRIP=1
+        #depmod -b /rootfs $KERNELRELEASE
+        #unlink /rootfs/lib/modules/$KERNELRELEASE/build
 finalize:
   - from: /rootfs
     to: /

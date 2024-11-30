@@ -26,8 +26,8 @@ steps:
       - |
         cd /src
 
-        make -j $(nproc)
-        make -j $(nproc) modules
+        #make -j $(nproc)
+        #make -j $(nproc) modules
 
         echo "Compiling device-tree blobs"
         make -j $(nproc) dtbs
